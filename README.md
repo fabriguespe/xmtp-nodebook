@@ -1,5 +1,3 @@
-```bash
-node main.js
-```
-# xmtp-nodebook
-# xmtp-nodebook
+# Install
+
+https://marketplace.visualstudio.com/items?itemName=donjayamanne.typescript-notebook
