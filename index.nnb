@@ -1,9 +1,37 @@
 {
     "cells": [
         {
-            "language": "typescript",
+            "language": "markdown",
             "source": [
-                "const ethers = require(\"ethers\");\nconst { Client } = require(\"@xmtp/xmtp-js\");\n\nasync function main() {\n  const xmtp = await Client.create(ethers.Wallet.createRandom(), {\n    env: \"dev\",\n  });\n  const conv = await xmtp.conversations.newConversation(\n    \"0x3F11b27F323b62B159D2642964fa27C46C841897\",\n  );\n  const message = await conv.send(\"gm\");\n  console.log(message);\n}\nmain();\n"
+                "### Get started\n```jsx\nnpm install @xmtp/xmtp-js"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Import libraries\nTo start with XMTP, install the XMTP client SDK:"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const { Wallet } = require(\"ethers\");\nconst { Client } = require(\"@xmtp/xmtp-js\");"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Initialize the wallet\nYou'll want to replace this with a wallet from your application"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "// You'll want to replace this with a wallet from your application\nconst wallet = Wallet.createRandom();\nconsole.log(\"Wallet address: \" + wallet.address);"
             ],
             "outputs": [
                 {
@@ -11,37 +39,167 @@
                         {
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
-                                "",
-                                "XX    XX MM    MM TTTTTT PPPPPP   DDDDD   EEEEEEE VV     VV ",
-                                " XX  XX  MMM  MMM   TT   PP   PP  DD  DD  EE      VV     VV ",
-                                "  XXXX   MM MM MM   TT   PPPPPP   DD   DD EEEEE    VV   VV  ",
-                                " XX  XX  MM    MM   TT   PP       DD   DD EE        VV VV   ",
-                                "XX    XX MM    MM   TT   PP       DDDDDD  EEEEEEE    VVV    ",
-                                "",
-                                "Connected to the XMTP 'dev' network. Use 'production' for production messages.",
-                                "https://github.com/xmtp/xmtp-js#xmtp-production-and-dev-network-environments",
-                                "",
-                                "DecodedMessage {",
-                                "  id: 'd5c2c3e3e60c570cd0631cbd1b3c29ab93607eb8546ba321884013ebdffbc304',",
-                                "  messageVersion: 'v1',",
-                                "  senderAddress: '0x174fA63eA856b9cbFC9EdCA5EbAb029302Fc4142',",
-                                "  recipientAddress: '0x3F11b27F323b62B159D2642964fa27C46C841897',",
-                                "  conversation: ConversationV1 {",
+                                "Wallet address: 0x213d7C069da027Ec678fCFC4B38fed057d9309AA",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Create a client\nA client is created that requires passing in a connected wallet that implements the Signer interface. Use client configuration options to change parameters of a client's network connection."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const xmtp = await Client.create(wallet, {env: \"dev\"});\nconsole.log(xmtp)\nconsole.log(\"Client created\",xmtp.address);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "ReferenceError",
+                                "message": "wallet is not defined",
+                                "stack": "    at <Cell 7> [1, 0]\n    at <Cell 7> [6, 46]\n    at Script.runInContext (node:vm:141:12)\n    at Script.runInNewContext (node:vm:146:17)\n    at Object.runInNewContext (node:vm:306:38)\n    at C (/Users/fabrizioguespe/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:113345)\n    at t.execCode (/Users/fabrizioguespe/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:114312)\n    at k.<anonymous> (/Users/fabrizioguespe/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:142156)\n    at k.emit (node:events:513:28)\n    at k.emit (node:domain:489:12)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Check if an address is on the network\n\nFirst you need to check if the address you want to message is on the XMTP network. You can do this by calling client.canMessage with the address you want to message."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//Message this XMTP message bot to get an immediate automated reply:\n//gm.xmtp.eth (0x937C0d4a6294cdfa575de17382c7076b579DC176) env:production\nconst WALLET_TO= \"0x20B572bE48527a770479744AeC6fE5644F97678B\"\nconst isOnProdNetwork = await xmtp.canMessage(WALLET_TO);\nconsole.log(\"Can message: \" + isOnProdNetwork);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Can message: true",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Start a new conversation\n\nYou can create a new conversation with any EVM address activated on the XMTP network. For now we are only compatible with EVM wallets"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const conversation = await xmtp.conversations.newConversation(WALLET_TO);\nconsole.log(\"Conversation created\",conversation);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Conversation created ConversationV2 {",
+                                "  topic: '/xmtp/0/m-vOFpbj26vOfb5alEsLCYUphhZoMNNGUD9nDexQAQmL8/proto',",
+                                "  createdAt: 2023-07-13T23:15:39.526Z,",
+                                "  context: undefined,",
+                                "  client: <ref *1> Client {",
+                                "    contacts: Set(0) {},",
+                                "    knownPublicKeyBundles: Map(1) {",
+                                "      '0x20B572bE48527a770479744AeC6fE5644F97678B' => [SignedPublicKeyBundle]",
+                                "    },",
+                                "    keystore: InMemoryKeystore {",
+                                "      v1Keys: [PrivateKeyBundleV1],",
+                                "      v2Keys: [PrivateKeyBundleV2],",
+                                "      inviteStore: [InviteStore],",
+                                "      authenticator: [LocalAuthenticator]",
+                                "    },",
+                                "    publicKeyBundle: PublicKeyBundle { identityKey: [PublicKey], preKey: [PublicKey] },",
+                                "    address: '0x43948acBbB42Ca3e28d433aa588D54Ef954065eB',",
+                                "    _conversations: Conversations {",
+                                "      client: [Circular *1],",
+                                "      v1Cache: [ConversationCache],",
+                                "      v2Mutex: [Mutex]",
+                                "    },",
+                                "    _codecs: Map(1) { 'xmtp.org/text' => TextCodec {} },",
+                                "    _maxContentSize: 104857600,",
+                                "    apiClient: ApiClient {",
+                                "      pathPrefix: 'https://dev.xmtp.network',",
+                                "      maxRetries: 5,",
+                                "      appVersion: undefined,",
+                                "      version: 'xmtp-js/8.2.1',",
+                                "      authCache: [AuthCache]",
+                                "    },",
+                                "    _backupClient: NoBackupClient { configuration: [Object] }",
+                                "  },",
+                                "  peerAddress: '0x20B572bE48527a770479744AeC6fE5644F97678B'",
+                                "}",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Send a message\nTo send a message, the recipient must have already started their client at least once and consequently advertised their key bundle on the network."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const message = await conversation.send(\"gm\");\nconsole.log(\"Message sent\",message);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Message sent DecodedMessage {",
+                                "  id: '48b7c8cf231a73d91522c4c45c134391fa81f4c978fd659fae493b2cb8ac1323',",
+                                "  messageVersion: 'v2',",
+                                "  senderAddress: '0x43948acBbB42Ca3e28d433aa588D54Ef954065eB',",
+                                "  recipientAddress: undefined,",
+                                "  conversation: ConversationV2 {",
+                                "    topic: '/xmtp/0/m-vOFpbj26vOfb5alEsLCYUphhZoMNNGUD9nDexQAQmL8/proto',",
+                                "    createdAt: 2023-07-13T23:15:39.526Z,",
                                 "    context: undefined,",
-                                "    peerAddress: '0x3F11b27F323b62B159D2642964fa27C46C841897',",
                                 "    client: Client {",
-                                "      contacts: [Set],",
+                                "      contacts: Set(0) {},",
                                 "      knownPublicKeyBundles: [Map],",
                                 "      keystore: [InMemoryKeystore],",
                                 "      publicKeyBundle: [PublicKeyBundle],",
-                                "      address: '0x174fA63eA856b9cbFC9EdCA5EbAb029302Fc4142',",
+                                "      address: '0x43948acBbB42Ca3e28d433aa588D54Ef954065eB',",
                                 "      _conversations: [Conversations],",
                                 "      _codecs: [Map],",
                                 "      _maxContentSize: 104857600,",
                                 "      apiClient: [ApiClient],",
                                 "      _backupClient: [NoBackupClient]",
                                 "    },",
-                                "    createdAt: 2023-07-09T13:50:04.162Z",
+                                "    peerAddress: '0x20B572bE48527a770479744AeC6fE5644F97678B'",
                                 "  },",
                                 "  contentType: ContentTypeId {",
                                 "    authorityId: 'xmtp.org',",
@@ -49,12 +207,38 @@
                                 "    versionMajor: 1,",
                                 "    versionMinor: 0",
                                 "  },",
-                                "  sent: 2023-07-09T13:50:04.163Z,",
+                                "  sent: 2023-07-13T23:15:43.312Z,",
                                 "  error: undefined,",
                                 "  content: 'gm',",
-                                "  contentTopic: '/xmtp/0/intro-0x3F11b27F323b62B159D2642964fa27C46C841897/proto',",
+                                "  contentTopic: '/xmtp/0/m-vOFpbj26vOfb5alEsLCYUphhZoMNNGUD9nDexQAQmL8/proto',",
                                 "  contentBytes: <Buffer 0a 12 0a 08 78 6d 74 70 2e 6f 72 67 12 04 74 65 78 74 18 01 12 11 0a 08 65 6e 63 6f 64 69 6e 67 12 05 55 54 46 2d 38 22 02 67 6d>",
                                 "}",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Stream messages in a conversation\nYou can receive the complete message history in a conversation."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "for await (const message of await conversation.streamMessages()) {\n  console.log(`New message from ${message.senderAddress}: ${message.content}`);\n}"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "New message from 0x20B572bE48527a770479744AeC6fE5644F97678B: gm",
                                 ""
                             ]
                         }
