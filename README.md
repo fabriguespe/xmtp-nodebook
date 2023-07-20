@@ -1,4 +1,16 @@
-# Install
+# Requirements
+
+### Clone repo
+
+[XMTP Nodebook](https://github.com/fabriguespe/xmtp-nodebook)
+
+```bash
+git clone git@github.com:fabriguespe/xmtp-nodebook.git
+cd xmtp-nodebook.git
+npm install
+```
+
+### Install plugin (VSCode)
 
 https://marketplace.visualstudio.com/items?itemName=donjayamanne.typescript-notebook
 

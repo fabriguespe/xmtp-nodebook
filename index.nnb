@@ -3,7 +3,7 @@
         {
             "language": "markdown",
             "source": [
-                "### Get started\n```jsx\nnpm install @xmtp/xmtp-js"
+                "### Get started\n```jsx\nnpm install @xmtp/xmtp-js\n```"
             ],
             "outputs": []
         },
@@ -17,7 +17,7 @@
         {
             "language": "javascript",
             "source": [
-                "const { Wallet } = require(\"ethers\");\nconst { Client } = require(\"@xmtp/xmtp-js\");"
+                "const { Wallet } = require(\"ethers\");\nconst { Client } = require(\"@xmtp/xmtp-js\");\n//who are you\n"
             ],
             "outputs": []
         },
@@ -39,7 +39,7 @@
                         {
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
-                                "Wallet address: 0x213d7C069da027Ec678fCFC4B38fed057d9309AA",
+                                "Wallet address: 0x3F86b1d9a4C7314Adc1c2B2c8B595E5B3B8B1E5d",
                                 ""
                             ]
                         }
@@ -63,12 +63,21 @@
                 {
                     "items": [
                         {
-                            "mime": "application/vnd.code.notebook.error",
-                            "value": {
-                                "name": "ReferenceError",
-                                "message": "wallet is not defined",
-                                "stack": "    at <Cell 7> [1, 0]\n    at <Cell 7> [6, 46]\n    at Script.runInContext (node:vm:141:12)\n    at Script.runInNewContext (node:vm:146:17)\n    at Object.runInNewContext (node:vm:306:38)\n    at C (/Users/fabrizioguespe/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:113345)\n    at t.execCode (/Users/fabrizioguespe/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:114312)\n    at k.<anonymous> (/Users/fabrizioguespe/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:142156)\n    at k.emit (node:events:513:28)\n    at k.emit (node:domain:489:12)"
-                            }
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                "XX    XX MM    MM TTTTTT PPPPPP   DDDDD   EEEEEEE VV     VV ",
+                                " XX  XX  MMM  MMM   TT   PP   PP  DD  DD  EE      VV     VV ",
+                                "  XXXX   MM MM MM   TT   PPPPPP   DD   DD EEEEE    VV   VV  ",
+                                " XX  XX  MM    MM   TT   PP       DD   DD EE        VV VV   ",
+                                "XX    XX MM    MM   TT   PP       DDDDDD  EEEEEEE    VVV    ",
+                                "",
+                                "Connected to the XMTP 'dev' network. Use 'production' for production messages.",
+                                "https://github.com/xmtp/xmtp-js#xmtp-production-and-dev-network-environments",
+                                "",
+                                "Client created 0x3F86b1d9a4C7314Adc1c2B2c8B595E5B3B8B1E5d",
+                                ""
+                            ]
                         }
                     ]
                 }
@@ -119,8 +128,8 @@
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
                                 "Conversation created ConversationV2 {",
-                                "  topic: '/xmtp/0/m-vOFpbj26vOfb5alEsLCYUphhZoMNNGUD9nDexQAQmL8/proto',",
-                                "  createdAt: 2023-07-13T23:15:39.526Z,",
+                                "  topic: '/xmtp/0/m-9IRyikecaQamw9HEy8dArWRVoDrpLBm7s2OuCCJzgJc/proto',",
+                                "  createdAt: 2023-07-18T16:53:17.958Z,",
                                 "  context: undefined,",
                                 "  client: <ref *1> Client {",
                                 "    contacts: Set(0) {},",
@@ -134,7 +143,7 @@
                                 "      authenticator: [LocalAuthenticator]",
                                 "    },",
                                 "    publicKeyBundle: PublicKeyBundle { identityKey: [PublicKey], preKey: [PublicKey] },",
-                                "    address: '0x43948acBbB42Ca3e28d433aa588D54Ef954065eB',",
+                                "    address: '0x3F86b1d9a4C7314Adc1c2B2c8B595E5B3B8B1E5d',",
                                 "    _conversations: Conversations {",
                                 "      client: [Circular *1],",
                                 "      v1Cache: [ConversationCache],",
@@ -146,7 +155,7 @@
                                 "      pathPrefix: 'https://dev.xmtp.network',",
                                 "      maxRetries: 5,",
                                 "      appVersion: undefined,",
-                                "      version: 'xmtp-js/8.2.1',",
+                                "      version: 'xmtp-js/8.0.2',",
                                 "      authCache: [AuthCache]",
                                 "    },",
                                 "    _backupClient: NoBackupClient { configuration: [Object] }",
@@ -179,20 +188,20 @@
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
                                 "Message sent DecodedMessage {",
-                                "  id: '48b7c8cf231a73d91522c4c45c134391fa81f4c978fd659fae493b2cb8ac1323',",
+                                "  id: '6a67cc295a2dcebd3a2f5b0c476d439b62a49dfdfabc2e7e9744889c8175b658',",
                                 "  messageVersion: 'v2',",
-                                "  senderAddress: '0x43948acBbB42Ca3e28d433aa588D54Ef954065eB',",
+                                "  senderAddress: '0x3F86b1d9a4C7314Adc1c2B2c8B595E5B3B8B1E5d',",
                                 "  recipientAddress: undefined,",
                                 "  conversation: ConversationV2 {",
-                                "    topic: '/xmtp/0/m-vOFpbj26vOfb5alEsLCYUphhZoMNNGUD9nDexQAQmL8/proto',",
-                                "    createdAt: 2023-07-13T23:15:39.526Z,",
+                                "    topic: '/xmtp/0/m-9IRyikecaQamw9HEy8dArWRVoDrpLBm7s2OuCCJzgJc/proto',",
+                                "    createdAt: 2023-07-18T16:53:17.958Z,",
                                 "    context: undefined,",
                                 "    client: Client {",
                                 "      contacts: Set(0) {},",
                                 "      knownPublicKeyBundles: [Map],",
                                 "      keystore: [InMemoryKeystore],",
                                 "      publicKeyBundle: [PublicKeyBundle],",
-                                "      address: '0x43948acBbB42Ca3e28d433aa588D54Ef954065eB',",
+                                "      address: '0x3F86b1d9a4C7314Adc1c2B2c8B595E5B3B8B1E5d',",
                                 "      _conversations: [Conversations],",
                                 "      _codecs: [Map],",
                                 "      _maxContentSize: 104857600,",
@@ -207,10 +216,10 @@
                                 "    versionMajor: 1,",
                                 "    versionMinor: 0",
                                 "  },",
-                                "  sent: 2023-07-13T23:15:43.312Z,",
+                                "  sent: 2023-07-18T16:53:20.056Z,",
                                 "  error: undefined,",
                                 "  content: 'gm',",
-                                "  contentTopic: '/xmtp/0/m-vOFpbj26vOfb5alEsLCYUphhZoMNNGUD9nDexQAQmL8/proto',",
+                                "  contentTopic: '/xmtp/0/m-9IRyikecaQamw9HEy8dArWRVoDrpLBm7s2OuCCJzgJc/proto',",
                                 "  contentBytes: <Buffer 0a 12 0a 08 78 6d 74 70 2e 6f 72 67 12 04 74 65 78 74 18 01 12 11 0a 08 65 6e 63 6f 64 69 6e 67 12 05 55 54 46 2d 38 22 02 67 6d>",
                                 "}",
                                 ""
@@ -232,19 +241,7 @@
             "source": [
                 "for await (const message of await conversation.streamMessages()) {\n  console.log(`New message from ${message.senderAddress}: ${message.content}`);\n}"
             ],
-            "outputs": [
-                {
-                    "items": [
-                        {
-                            "mime": "application/vnd.code.notebook.stdout",
-                            "value": [
-                                "New message from 0x20B572bE48527a770479744AeC6fE5644F97678B: gm",
-                                ""
-                            ]
-                        }
-                    ]
-                }
-            ]
+            "outputs": []
         }
     ]
 }
