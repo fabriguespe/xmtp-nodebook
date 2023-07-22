@@ -1,0 +1,59 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "### Get started\n```jsx\nnpm install @xmtp/xmtp-js xmtp-content-type-remote-attachment\n```\n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const { Wallet } = require(\"ethers\");\nconst { Client } = require(\"@xmtp/xmtp-js\");\nimport {Blob} from 'buffer';\n\nimport {\n  ContentTypeRemoteAttachment,\n  RemoteAttachmentCodec,\n} from \"@xmtp/content-type-remote-attachment\";\nconst WALLET_TO= \"0x7E0b0363404751346930AF92C80D1fef932Cc41a\"\n\n// You'll want to replace this with a wallet from your application\nconst wallet = Wallet.createRandom();\nconsole.log(\"Wallet address: \" + wallet.address);\n// Create the XMTP client\nconst xmtp = await Client.create(wallet, { env: \"dev\" });\n// Register the codecs. AttachmentCodec is for local attachments (<1MB)\nxmtp.registerCodec(new RemoteAttachmentCodec());\n\n\n//Local file details\nconst fs = require('fs');\nconst file = fs.readFileSync('xmtp.png');\nconst filename = path.basename('xmtp.png');\nconst extname = path.extname('xmtp.png');\nconsole.log(`Filename: ${filename}`);\nconsole.log(`Type: ${extname}`);\n\n\n//Create a new conversation\nconst conversation = await xmtp.conversations.newConversation(WALLET_TO);\nconsole.log(\"Conversation created\",conversation.topic);\n//Send a test message\nconst message = await conversation.send(\"gm\");\nconst handleSmallFile = async (file) => {\n\n  // Convert the file to a Uint8Array\n  const blob = new Blob([file], { type: extname });\n  let imgArray = new Uint8Array(await blob.arrayBuffer());\n\n  const attachment = {\n    filename: filename,\n    mimeType: extname,\n    data: imgArray,\n  };\n\n  console.log(\"Attachment created\",attachment);\n  await conversation.send(attachment, { contentType: ContentTypeAttachment });\n\n};\n\nhandleSmallFile(file)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Wallet address: 0x4518a6063d54eD32709004EDBcdF0104d38f6c15",
+                                "",
+                                "XX    XX MM    MM TTTTTT PPPPPP   DDDDD   EEEEEEE VV     VV ",
+                                " XX  XX  MMM  MMM   TT   PP   PP  DD  DD  EE      VV     VV ",
+                                "  XXXX   MM MM MM   TT   PPPPPP   DD   DD EEEEE    VV   VV  ",
+                                " XX  XX  MM    MM   TT   PP       DD   DD EE        VV VV   ",
+                                "XX    XX MM    MM   TT   PP       DDDDDD  EEEEEEE    VVV    ",
+                                "",
+                                "Connected to the XMTP 'dev' network. Use 'production' for production messages.",
+                                "https://github.com/xmtp/xmtp-js#xmtp-production-and-dev-network-environments",
+                                "",
+                                "Filename: xmtp.png",
+                                "Type: .png",
+                                "Conversation created /xmtp/0/m-LXriP5tJrmjCJlBMArYw2npDX34ILlMD0XmDuKTwDOQ/proto",
+                                "Attachment created {",
+                                "  filename: 'xmtp.png',",
+                                "  mimeType: '.png',",
+                                "  data: Uint8Array(27918) [",
+                                "    137,  80,  78,  71,  13,  10,  26,  10,   0,   0,   0,  13,",
+                                "     73,  72,  68,  82,   0,   0,   1, 144,   0,   0,   1, 144,",
+                                "      8,   6,   0,   0,   0, 128, 191,  54, 204,   0,   0,   0,",
+                                "      9, 112,  72,  89, 115,   0,   0,  11,  19,   0,   0,  11,",
+                                "     19,   1,   0, 154, 156,  24,   0,   0,   4, 244, 105,  84,",
+                                "     88, 116,  88,  77,  76,  58,  99, 111, 109,  46,  97, 100,",
+                                "    111,  98, 101,  46, 120, 109, 112,   0,   0,   0,   0,   0,",
+                                "     60,  63, 120, 112,  97,  99, 107, 101, 116,  32,  98, 101,",
+                                "    103, 105, 110,  61,",
+                                "    ... 27818 more items",
+                                "  ]",
+                                "}",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

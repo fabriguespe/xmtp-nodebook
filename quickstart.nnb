@@ -57,7 +57,7 @@
         {
             "language": "javascript",
             "source": [
-                "const xmtp = await Client.create(wallet, {env: \"dev\"});\nconsole.log(xmtp)\nconsole.log(\"Client created\",xmtp.address);"
+                "const xmtp = await Client.create(wallet, {env: \"production\"});\nconsole.log(xmtp)\nconsole.log(\"Client created\",xmtp.address);"
             ],
             "outputs": [
                 {
@@ -228,7 +228,7 @@
         {
             "language": "javascript",
             "source": [
-                "const message = await conversation.send(\"gm\");\n\nconsole.log(\"Message sent\",message);"
+                "const message = await conversation.send(\"gm\");\nconsole.log(\"Message sent\",message);"
             ],
             "outputs": [
                 {
@@ -273,33 +273,6 @@
                                 "}",
                                 ""
                             ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "language": "markdown",
-            "source": [
-                "## Send media message\nUse the RemoteAttachmentCodec from the @xmtp/content-type-remote-attachment package to support message attachments in your app—including images, videos, gifs, and documents."
-            ],
-            "outputs": []
-        },
-        {
-            "language": "javascript",
-            "source": [
-                "const { Wallet } = require(\"ethers\");\nconst { Client } = require(\"@xmtp/xmtp-js\");\nimport {\n  AttachmentCodec,\n  RemoteAttachmentCodec,\n} from \"@xmtp/content-type-remote-attachment\";\n\n// You'll want to replace this with a wallet from your application\nconst wallet = Wallet.createRandom();\nconsole.log(\"Wallet address: \" + wallet.address);\n// Create the XMTP client\nconst xmtp = await Client.create(wallet, { env: \"dev\" });\n\n  // Register the codecs. AttachmentCodec is for local attachments (<1MB)\nxmtp.registerCodec(new AttachmentCodec());\n//RemoteAttachmentCodec is for remote attachments (>1MB) using thirdweb storage\nxmtp.registerCodec(new RemoteAttachmentCodec());"
-            ],
-            "outputs": [
-                {
-                    "items": [
-                        {
-                            "mime": "application/vnd.code.notebook.error",
-                            "value": {
-                                "name": "ReferenceError",
-                                "message": "Wallet is not defined",
-                                "stack": "    at <Cell 15> [8, 0]\n    at <Cell 15> [10, 46]\n    at Script.runInContext (node:vm:141:12)\n    at Script.runInNewContext (node:vm:146:17)\n    at Object.runInNewContext (node:vm:306:38)\n    at C (/Users/fabrizioguespe/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:113345)\n    at t.execCode (/Users/fabrizioguespe/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:114312)\n    at k.<anonymous> (/Users/fabrizioguespe/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:142156)\n    at k.emit (node:events:513:28)\n    at k.emit (node:domain:489:12)"
-                            }
                         }
                     ]
                 }
